@@ -1,6 +1,6 @@
 import os
 from flask import Flask, flash, request, jsonify, redirect, url_for, render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
 
@@ -31,7 +31,8 @@ def multicast(code):
     if request.method == 'POST':
         content = request.json
         print(code,content['id'])
-        socketio.emit('multicast', jsonify(content), callback=confirmReception,namespace='/'+code)
+        with app.app_context():
+            socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)
         return jsonify({"code":code,"id":content['id']})
     return '''
     <!doctype html>

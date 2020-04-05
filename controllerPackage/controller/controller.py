@@ -1,5 +1,6 @@
 import socketio
 from controller.mobile import Mobile
+import json
 
 class Controller:
 
@@ -29,7 +30,7 @@ class Controller:
         @sio.event(namespace='/'+code)
         def multicast(data):
             print('Multicast received!')
-            print(data)
+            self.handle(data)
 
         @sio.on('my message',namespace='/'+code)
         def on_message(data):
@@ -46,11 +47,22 @@ class Controller:
     def disconnect(self):
         self.sio.disconnect()
     
+    def getMobile(self,id):
+        if id in self.mobiles:
+            return self.mobiles['id']
+        else:
+            return self.create_mobile(id)
+
+    def handle(self,data):
+        mobile = self.getMobile(data['id'])
+        mobile.handle(data)
+
     def getMobiles(self):
         return self.mobiles
 
     def create_mobile(self,id):
-        self.mobiles[id] = Mobile(id)
+        self.mobiles['id'] = Mobile(id)
+        return self.mobiles['id']
     
     
 
