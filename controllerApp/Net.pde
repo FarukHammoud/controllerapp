@@ -80,14 +80,15 @@ class Net
       @Override
         public void run() {
         try {
-          URL url = new URL("http://controller.viarezo.fr/multicast?code="+code+"&id="+uuid);
+          URL url = new URL("http://controller.viarezo.fr/multicast/"+code);
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("POST");
           conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
           conn.setRequestProperty("Accept", "application/json");
           conn.setDoOutput(true);
           conn.setDoInput(true);
-
+          
+          jsonParam.put("id", uuid);
           println("JSON", jsonParam.toString());
           DataOutputStream os = new DataOutputStream(conn.getOutputStream());
           //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));

@@ -26,15 +26,13 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/multicast', methods=['GET', 'POST'])
-def multicast():
+@app.route('/multicast/<code>', methods=['GET', 'POST'])
+def multicast(code):
     if request.method == 'POST':
-        code = request.form['code']
-        id = request.form['id']
         content = request.json
-        print(code,id,content)
+        print(code,content['id'])
         socketio.emit('multicast', content, callback=confirmReception,namespace='/'+code)
-        return jsonify({"code":code,"id":id})
+        return jsonify({"code":code,"id":content[id]})
     return '''
     <!doctype html>
     <title>Use a HTTP POST Request</title>
