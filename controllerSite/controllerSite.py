@@ -30,6 +30,7 @@ def allowed_file(filename):
 def multicast(code):
     if request.method == 'POST':
         content = request.json
+        print(content)
         print(code,content['id'])
         with app.app_context():
             socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)

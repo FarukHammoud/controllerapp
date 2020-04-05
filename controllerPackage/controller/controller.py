@@ -41,7 +41,7 @@ class Controller:
 
     def connect(self):
         global code
-        self.sio.connect('http://localhost',namespaces=['/'+self.code])
+        self.sio.connect('http://controller.viarezo.fr',namespaces=['/'+self.code])
         self.sio.emit('code', {'code': self.code})
     
     def disconnect(self):
