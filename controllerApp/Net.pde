@@ -1,11 +1,15 @@
 import java.io.*;
 import java.net.*;
+import java.util.UUID;
 
 class Net
 {
   JSONObject jsonParam;
+  String uuid;
+  
   public Net()
   {
+    this.uuid = UUID.randomUUID().toString();
   }
   public void sendTap(float x, float y){
      jsonParam = new JSONObject();
@@ -76,7 +80,7 @@ class Net
       @Override
         public void run() {
         try {
-          URL url = new URL("http://mathboard.cs-campus.fr/multicast/a1b2c3");
+          URL url = new URL("http://controller.viarezo.fr/multicast?code="+code+"&id="+uuid);
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("POST");
           conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");

@@ -14,6 +14,7 @@ float cx, cy, cz;
 float Size = 10;
 float Angle = 0;
 PImage img;
+String code = "a1b2c3";
 Boolean keyboard_flag = false;
 ArrayList<Thing> things = new ArrayList<Thing>();
 ArrayList<BallWave> ball_waves = new ArrayList<BallWave>();
