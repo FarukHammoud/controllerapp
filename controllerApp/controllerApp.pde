@@ -50,14 +50,18 @@ void onFlick( float x, float y, float px, float py, float v)
 
 void onPinch(float x, float y, float d)
 {
-  Size = constrain(Size+d, 1, 2000);
-  net.sendPinch(x, y, d);
+  if (d != 0){
+    Size = constrain(Size+d, 1, 2000);
+    net.sendPinch(x, y, d);
+  }
 }
 
 void onRotate(float x, float y, float ang)
 {
-  Angle += ang;
-  net.sendRotation(x, y, ang);
+  if (ang != 0){
+    Angle += ang;
+    net.sendRotation(x, y, ang);
+  }
 }
 
 //these still work if we forward MotionEvents below

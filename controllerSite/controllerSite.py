@@ -30,11 +30,14 @@ def allowed_file(filename):
 def multicast(code):
     if request.method == 'POST':
         content = request.json
-        print(content)
-        print(code,content['id'])
-        with app.app_context():
-            socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)
-        return jsonify({"code":code,"id":content['id']})
+        if not 'id' in content:
+            print('[PROBLEM]',content)
+            return jsonify({})
+        else:
+            print(code,content['id'])
+            with app.app_context():
+                socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)
+            return jsonify({"code":code,"id":content['id']})
     return '''
     <!doctype html>
     <title>Use a HTTP POST Request</title>
@@ -45,7 +48,7 @@ def confirmReception():
 @socketio.on('code')
 def handle_code(json, methods=['GET', 'POST']):
     print('code received: ' + str(json))
-    socketio.emit('message', json, callback=confirmReception,namespace='/a1b2c3')
+    socketio.emit('message', json,namespace='/a1b2c3')
 
 if __name__ == '__main__':
     socketio.run(app,debug = True,host = "0.0.0.0",port = 80)

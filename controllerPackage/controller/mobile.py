@@ -9,6 +9,7 @@ class Mobile:
             print('Its not my problem')
         else:
             print('ill handle it!')
+            print(data)
     def on_left_swipe(self):
         if self.help:
             print('[LEFT SWIPE DETECTED] You can overwrite on_left_swipe to handle it.')
