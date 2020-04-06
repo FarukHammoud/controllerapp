@@ -4,9 +4,16 @@ import json
 
 class Controller:
 
-    def __init__(self,code = 'a1b2c3'):
+    def __init__(self,code = 'a1b2c3',single_mobile = True):
+        
         # Room Code
         self.code = code
+        self.single_mobile = single_mobile
+
+        if single_mobile:
+            self.mobile = Mobile('')
+        else:
+            self.mobiles = {}
 
         # Socket IO Communication Protocol Definition
         sio = socketio.Client()
@@ -29,7 +36,7 @@ class Controller:
         
         @sio.event(namespace='/'+code)
         def multicast(data):
-            print('Multicast received!')
+            #print('Multicast received!')
             self.handle(data)
 
         @sio.on('my message',namespace='/'+code)
@@ -37,10 +44,9 @@ class Controller:
             print('I received a message!')
         
         self.sio = sio
-        self.mobiles = {} # id:MOBILE
+        self.connect()
 
     def connect(self):
-        global code
         self.sio.connect('http://controller.viarezo.fr',namespaces=['/'+self.code])
         self.sio.emit('code', {'code': self.code})
     
@@ -48,10 +54,13 @@ class Controller:
         self.sio.disconnect()
     
     def getMobile(self,id):
-        if id in self.mobiles:
-            return self.mobiles['id']
+        if self.single_mobile:
+            return self.mobile
         else:
-            return self.create_mobile(id)
+            if id in self.mobiles:
+                return self.mobiles[id]
+            else:
+                return self.create_mobile(id)
 
     def handle(self,data):
         mobile = self.getMobile(data['id'])
@@ -61,8 +70,10 @@ class Controller:
         return self.mobiles
 
     def create_mobile(self,id):
-        self.mobiles['id'] = Mobile(id)
-        return self.mobiles['id']
+        self.mobiles[id] = Mobile(id)
+        print("New Mobile connected!")
+        return self.mobiles[id]
+
     
     
 

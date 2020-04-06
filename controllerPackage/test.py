@@ -1,8 +1,10 @@
-from controller.controller import Controller
-from time import sleep
+from controller import Controller
 
 c = Controller('a1b2c3')
-c.connect()
-print('luckly..')
+
+while(True):
+    print(c.mobile.getAngle())
+
+
 
 

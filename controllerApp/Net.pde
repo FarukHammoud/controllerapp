@@ -41,20 +41,20 @@ class Net
      jsonParam.put("d", d);
      sendPost();
   }
-  public void sendAccelerometer(float x, float y,float z){
+  public void sendAccelerometer(float ax, float ay,float az){
      jsonParam = new JSONObject();
      jsonParam.put("evnType", "Accelerometer");
-     jsonParam.put("x", y);
-     jsonParam.put("y", x);
-     jsonParam.put("z", z);
+     jsonParam.put("ax", ay);
+     jsonParam.put("ay", ax);
+     jsonParam.put("az", az);
      sendPost();
   }
-  public void sendGyroscope(float x, float y,float z){
+  public void sendGyroscope(float gx, float gy,float gz){
      jsonParam = new JSONObject();
      jsonParam.put("evnType", "Gyroscope");
-     jsonParam.put("x", y);
-     jsonParam.put("y", x);
-     jsonParam.put("z", z);
+     jsonParam.put("gx", gx);
+     jsonParam.put("gy", gy);
+     jsonParam.put("gz", gz);
      sendPost();
   }
   public void sendDoubleTap(float x, float y){
@@ -66,7 +66,7 @@ class Net
   }
   public void sendFlick(float x, float y,float px, float py,float v){
      jsonParam = new JSONObject();
-     jsonParam.put("evnType", "Double Tap");
+     jsonParam.put("evnType", "Flick");
      jsonParam.put("x", y);
      jsonParam.put("y", x);
      jsonParam.put("px", px);
