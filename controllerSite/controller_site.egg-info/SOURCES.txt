@@ -1,6 +1,0 @@
-README.md
-setup.py
-controller_site.egg-info/PKG-INFO
-controller_site.egg-info/SOURCES.txt
-controller_site.egg-info/dependency_links.txt
-controller_site.egg-info/top_level.txt

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="controller", 
-    version="0.0.1",
+    version="0.0.2",
     author="Faruk Hammoud",
     author_email="farukhammoud@student-cs.fr",
     description="Enables connection to ControllerApp",

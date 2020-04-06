@@ -1,40 +1,25 @@
-import os
-from flask import Flask, flash, request, jsonify, redirect, url_for, render_template
+from flask import Flask, request, jsonify, render_template
 from flask_socketio import SocketIO, emit
 from flask_bootstrap import Bootstrap
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-socketio = SocketIO(app)
-clients = {}
-
-queue = []
-
 app.secret_key = 'super secret key'
-app.config['UPLOAD_FOLDER'] = 'upload'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+socketio = SocketIO(app)
 Bootstrap(app)
-
-def remove_id(id):
-    queue.remove(id)
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/multicast/<string:code>', methods=['GET', 'POST'])
 def multicast(code):
     if request.method == 'POST':
         content = request.json
         if not 'id' in content:
-            print('[PROBLEM]',content)
+            #print('[PROBLEM]',content)
             return jsonify({})
         else:
-            print(code,content['id'])
+            #print(code,content['id'])
             with app.app_context():
                 socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)
             return jsonify({"code":code,"id":content['id']})
@@ -42,12 +27,9 @@ def multicast(code):
     <!doctype html>
     <title>Use a HTTP POST Request</title>
     '''
-def confirmReception():
-    print('Message Received.')
 
 @socketio.on('code')
 def handle_code(json, methods=['GET', 'POST']):
-    print('code received: ' + str(json))
     socketio.emit('message', json,namespace='/a1b2c3')
 
 if __name__ == '__main__':
