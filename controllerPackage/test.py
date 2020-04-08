@@ -1,10 +1,11 @@
 from controller import Controller
 
-c = Controller('a1b2c3')
+c = Controller('fabric')
 
-while(True):
+def onRotation(x,y,ang):
     print(c.mobile.getAngle())
 
+c.mobile.onRotation = onRotation
 
 
 
