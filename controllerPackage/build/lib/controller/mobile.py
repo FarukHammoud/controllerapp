@@ -6,6 +6,7 @@ class Mobile:
         self.gx, self.gy, self.gz = 0, 0, 0
         self.ax, self.ay, self.az = 0, 0 ,0
         self.angle = 0
+        self.text  = ''
 
     def handle(self,data):
         try:
@@ -33,6 +34,11 @@ class Mobile:
                 y = data['y']
                 d = data['d']
                 self.onPinch(x,y,d)
+            
+            elif evnType == 'Text':
+                text = data['text']
+                self.text = text
+                self.onText(text)
 
             elif evnType == 'Gyroscope':
                 gx = data['gx']
@@ -120,4 +126,8 @@ class Mobile:
     def on_down_swipe(self):
         if self.help:
             print('[DOWN SWIPE DETECTED] You can overwrite on_down_swipe to handle it.')
+    
+    def onText(self,text):
+        if self.help:
+            print('[TEXT DETECTED] You can overwrite onText(text) to handle it.')
     

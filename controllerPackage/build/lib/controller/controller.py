@@ -5,7 +5,7 @@ import json
 class Controller:
 
     def __init__(self,code = 'a1b2c3',single_mobile = True):
-        
+
         # Room Code
         self.code = code
         self.single_mobile = single_mobile

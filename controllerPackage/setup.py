@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="controller", 
-    version="0.0.2",
+    version="0.0.3",
     author="Faruk Hammoud",
     author_email="farukhammoud@student-cs.fr",
     description="Enables connection to ControllerApp",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://gitlab.viarezo.fr/2019hammoudf/controller",
+    url="http://controller.viarezo.fr",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
