@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: controller
-Version: 0.0.3
+Version: 0.0.5
 Summary: Enables connection to ControllerApp
-Home-page: http://controller.viarezo.fr
+Home-page: http://www.controllerapp.ml
 Author: Faruk Hammoud
 Author-email: farukhammoud@student-cs.fr
 License: UNKNOWN

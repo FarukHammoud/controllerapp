@@ -9,7 +9,7 @@ KetaiKeyboard keyboard;
 UI ui;
 Net net;
 
-int DELAY = 200;
+int DELAY = 333;
 
 float accelerometerX = 0;
 float accelerometerY = 0;
@@ -127,7 +127,7 @@ void keyPressed() {
 public boolean surfaceTouchEvent(MotionEvent event) {
 
   //call to keep mouseX, mouseY, etc updated
-  super.surfaceTouchEvent(event);
+  //super.surfaceTouchEvent(event);
 
   //forward event to class for processing
   return gesture.surfaceTouchEvent(event);
@@ -196,13 +196,10 @@ void onAccelerometerEvent(float x, float y, float z)
   cy = y/n;
   cz = z/n;
 
-  if (millis()-last_accelerometer > DELAY) {
-    last_accelerometer = millis();
-    net.sendAccelerometer(accelerometerX, accelerometerY, accelerometerZ);
-    accelerometerX = 0;
-    accelerometerY = 0;
-    accelerometerZ = 0;
-  }
+//  if (millis()-last_accelerometer > DELAY) {
+//   last_accelerometer = millis();
+//    net.sendAccelerometer(accelerometerX, accelerometerY, accelerometerZ);
+//  }
 }
 void onGyroscopeEvent(float x, float y, float z)
 {
@@ -211,7 +208,7 @@ void onGyroscopeEvent(float x, float y, float z)
   rotationZ += z;
   if (millis()-last_gyroscope > DELAY) {
     last_gyroscope = millis();
-    net.sendGyroscope(rotationX, rotationY, rotationZ);
+    net.sendAccGyr(accelerometerX, accelerometerY, accelerometerZ, rotationX, rotationY, rotationZ);
     rotationX = 0;
     rotationY = 0;
     rotationZ = 0;

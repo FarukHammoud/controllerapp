@@ -54,6 +54,18 @@ class Net
      jsonParam.put("id", uuid);
      sendPost();
   }
+  public void sendAccGyr(float ax, float ay,float az, float gx, float gy,float gz){
+     jsonParam = new JSONObject();
+     jsonParam.put("evnType", "Acc+Gyr");
+     jsonParam.put("ax", ay);
+     jsonParam.put("ay", ax);
+     jsonParam.put("az", az);
+     jsonParam.put("gx", gx);
+     jsonParam.put("gy", gy);
+     jsonParam.put("gz", gz);
+     jsonParam.put("id", uuid);
+     sendPost();
+  }
   public void sendGyroscope(float gx, float gy,float gz){
      jsonParam = new JSONObject();
      jsonParam.put("evnType", "Gyroscope");
@@ -95,7 +107,7 @@ class Net
       @Override
         public void run() {
         try {
-          URL url = new URL("http://controller.viarezo.fr/multicast/"+code);
+          URL url = new URL("http://www.controllerapp.ml/multicast/"+code);
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("POST");
           conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
