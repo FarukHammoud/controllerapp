@@ -51,6 +51,16 @@ class Mobile:
                 ay = data['ay']
                 az = data['az']
                 self.setAccelerometer(ax,ay,az)
+			
+			elif evnType == 'Acc+Gyr':
+                ax = data['ax']
+                ay = data['ay']
+                az = data['az']
+				gx = data['gx']
+                gy = data['gy']
+                gz = data['gz']
+                self.setAccelerometer(ax,ay,az)
+				self.setGyroscope(gx,gy,gz)
 
             elif evnType == 'Double Tap':
                 x = data['x']

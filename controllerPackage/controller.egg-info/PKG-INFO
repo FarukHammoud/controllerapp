@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: controller
-Version: 0.0.5
+Version: 0.0.6
 Summary: Enables connection to ControllerApp
 Home-page: http://www.controllerapp.ml
 Author: Faruk Hammoud
@@ -9,7 +9,7 @@ License: UNKNOWN
 Description: # Controller
         
         ControllerApp is a tool that allows you to catch all sorts of UI events like a simple tap on your mobile's screen or a device's acceleration directly in your Python code. 
-        [homepage](http://controller.viarezo.fr)
+        [documentation](http://www.controllerapp.ml)
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
