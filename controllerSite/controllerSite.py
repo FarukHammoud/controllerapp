@@ -21,7 +21,7 @@ def multicast(code):
         else:
             #print(code,content['id'])
             with app.app_context():
-                socketio.emit('multicast', {request.get_json()}, broadcast = True,namespace='/'+code)
+                socketio.emit('multicast', request.get_json(), broadcast = True,namespace='/'+code)
             return jsonify({"code":code,"id":content['id']})
     return '''
     <!doctype html>
@@ -34,6 +34,7 @@ def handle_code(json, methods=['GET', 'POST']):
 
 if __name__ == '__main__':
     socketio.run(app,debug = True,host = "0.0.0.0",port = 80)
+
 
 
     
