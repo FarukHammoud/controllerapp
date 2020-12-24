@@ -1,0 +1,5 @@
+#!/bin/bash
+# Script to run ControllerApp Site & API in background
+
+sudo pm2 start controllerSite.py --name controller_site --interpreter=python3
+sudo pm2 start controllerAPI.py --name controller_api --interpreter=python3
