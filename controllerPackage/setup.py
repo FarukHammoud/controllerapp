@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="controller", 
-    version="0.0.6",
+    version="0.0.9",
     author="Faruk Hammoud",
     author_email="farukhammoud@student-cs.fr",
     description="Enables connection to ControllerApp",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="http://www.controllerapp.ml",
+    url="https://www.controllerapp.ml",
     packages=setuptools.find_packages(),
 	install_requires=[
    'requests',

@@ -6,6 +6,7 @@ class Mobile:
         self.gx, self.gy, self.gz = 0, 0, 0
         self.ax, self.ay, self.az = 0, 0 ,0
         self.angle = 0
+        self.size = 100
         self.text  = ''
 
     def handle(self,data):
@@ -22,13 +23,6 @@ class Mobile:
                 y = data['y']
                 self.onLongPress(x,y)
 
-            elif evnType == 'Rotation':
-                x = data['x']
-                y = data['y']
-                angle = data['angle']
-                self.angle += angle
-                self.onRotation(x,y,angle)
-
             elif evnType == 'Pinch':
                 x = data['x']
                 y = data['y']
@@ -40,27 +34,19 @@ class Mobile:
                 self.text = text
                 self.onText(text)
 
-            elif evnType == 'Gyroscope':
+            elif evnType == 'RTD':
+                ax = data['ax']
+                ay = data['ay']
+                az = data['az']
                 gx = data['gx']
                 gy = data['gy']
                 gz = data['gz']
+                angle = data['angle']
+                size = data['size']
+                self.setAccelerometer(ax,ay,az)
                 self.setGyroscope(gx,gy,gz)
-
-            elif evnType == 'Accelerometer':
-                ax = data['ax']
-                ay = data['ay']
-                az = data['az']
-                self.setAccelerometer(ax,ay,az)
-			
-			elif evnType == 'Acc+Gyr':
-                ax = data['ax']
-                ay = data['ay']
-                az = data['az']
-				gx = data['gx']
-                gy = data['gy']
-                gz = data['gz']
-                self.setAccelerometer(ax,ay,az)
-				self.setGyroscope(gx,gy,gz)
+                self.angle = angle
+                self.size = size
 
             elif evnType == 'Double Tap':
                 x = data['x']
@@ -92,10 +78,9 @@ class Mobile:
     
     def getAngle(self):
         return self.angle
-    
-    def setAngle(self,angle):
-        self.angle = angle
 
+    def getSize(self):
+        return self.size
 
     def onTap(self,x,y):
         if self.help:
@@ -112,10 +97,6 @@ class Mobile:
     def onLongPress(self,x,y):
         if self.help:
             print('[LONGPRESS DETECTED] You can overwrite onLongPress(x,y) to handle it.')
-    
-    def onRotation(self,x,y,angle):
-        if self.help:
-            print('[ROTATION DETECTED] You can overwrite onRotation(x,y,angle) to handle it.')
     
     def onPinch(self,x,y,d):
         if self.help:

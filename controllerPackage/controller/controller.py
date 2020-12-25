@@ -23,8 +23,8 @@ class Controller:
             print("I'm connected!")
 
         @sio.event
-        def connect_error():
-            print("The connection failed!")
+        def connect_error(error):
+            print("The connection failed!",error)
 
         @sio.event
         def disconnect():

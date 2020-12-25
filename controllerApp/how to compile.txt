@@ -1,5 +1,0 @@
-export android project
-gradle 4.6 graddle plugin 3.2
-keystore path C:\Users\Faruk\Documents\Processing\android
-alias processing-keystore
-min sdk version exclude build include build
