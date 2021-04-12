@@ -20,7 +20,9 @@ if __name__ == '__main__':
     eventlet.wsgi.server(eventlet.wrap_ssl(eventlet.listen(("0.0.0.0", 443)),
         certfile='/etc/letsencrypt/live/www.controllerapp.ml/fullchain.pem',
         keyfile='/etc/letsencrypt/live/www.controllerapp.ml/privkey.pem',
-        server_side=True), app)  
+        server_side=True), app) 
+    #app.run(host='0.0.0.0',port=80,debug=True)
+
 
 
 
