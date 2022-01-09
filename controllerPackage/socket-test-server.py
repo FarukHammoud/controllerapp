@@ -1,11 +1,21 @@
 """
 A simple Python script to receive messages from a client over
-Bluetooth using Python sockets (with Python 3.3 or above).
+Bluetooth using Python sockets (with Python 3.3 (Linux) 3.10 (Windows) or above).
 """
 
 import socket
 
-hostMACAddress = 'B4:6B:FC:2E:54:6D' # The MAC address of a Bluetooth adapter on the server. The server might have multiple Bluetooth adapters.
+def get_mac():
+    from uuid import getnode as get_mac
+    macint = get_mac()
+    if type(macint) != int:
+        raise ValueError('invalid integer')
+    return ':'.join(['{}{}'.format(a, b)
+                     for a, b
+                     in zip(*[iter('{:012x}'.format(macint))]*2)])
+
+hostMACAddress = get_mac() # The MAC address of a Bluetooth adapter on the server. The server might have multiple Bluetooth adapters.
+print("Your MAC Adress is "+hostMACAddress)
 port = 4 # 3 is an arbitrary choice. However, it must match the port used by the client.
 backlog = 1
 size = 1024
